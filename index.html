@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="stockTicker">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Ticker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+    <script src="stock_ticker.js"></script>
+</head>
+
+<body style = "background-image:url(stock\ bg.png);
+ background-size: 100% 100%;
+background-position: 0%;
+background-attachment: fixed;"></body> 
+
+<body ng-controller="StockTickerController">
+    
+    
+    
+    <div ng-if="!players.length">
+
+        <p>
+        <font size="15"face="arial"color="white">    
+       
+        
+        
+    </font></p>
+    <p>
+        <font size="6" color="yellow">
+        <div ng-if="!players.name">
+            
+            <p>
+                <font size="6" color="green">
+                    <h5>.</h5>
+                    <h5>.</h5>
+                    <h5>.</h5>
+                    <h5>.</h5>
+                    <h5>.</h5>
+                    <h5>.</h5>
+        </font></p>
+            <h4>Please Enter Your Name to LOGIN</h4>
+            <input ng-model="data.name_players">
+        </font></p>
+
+        </div>
+    
+        <button class="btn btn-sm" ng-click="build_game(data.num_players)">Go</button>
+       
+       
+       <p>
+        <font color="lightgreen">
+      <h1> _______________________________________________INSTRUCTIONS_______________________________________________</h1>
+      <h5>.</h5>
+    </font></p>
+
+            <p>
+                <font color="white">
+       <h4>1. Enter your name and press "Go"</h4>
+            </font></p>
+
+            <p>
+                <font color="white">
+       <h4>2. You will be given ₹ 150K to construct your own portfolio which you prefer for best growth  </h4>
+            </font></p>
+
+            <p>
+                <font color="white">
+       <h4>3. The price of each stock will be given in the table. </h4>
+            </font></p>
+
+            <p>
+                <font color="white">
+       <h4>Tip - Don't use all the money at once, buy maximum stocks when the prices fall..........HAPPY INVESTING !!! </h4>
+            </font></p>
+    </div>
+    <div class="container" ng-if="players.length">
+    
+        <p>
+            <font size="6" color="green">
+                <h5>.</h5>
+                <h5>.</h5>
+                <h5>.</h5>
+                <h5>.</h5>
+                <h5>.</h5>
+                <h5>.</h5>
+                </font></p>
+        
+        <p>
+            <font size="10"face="arial"color="lightgreen"> 
+                
+        <h3>Add the STOCKS in your portfolio and then press "ROLL"</h3>
+        <h4>The price of stocks will fluctuate accordingly after each ROLL</h4>
+
+    </font></p>
+
+<div style="border:10px solid black;">
+    <p>
+        <font size="5"face="arial"color="white"> 
+
+        <div class="row">
+            <div class="col">
+                <p>
+                    <font face="arial"color="black"> 
+                <h2>_Stocks________Price_</h2>
+            </font></p>
+                <table class="table table-sm table-dark" style="width: 65%;">
+                    <tr ng-repeat="stock in stocks">
+                    <td>{{ stock }}</td>
+                        <td>{{ formatted_stock_value(stock) }}</td>
+                    </tr>
+                </table>
+                <button class="btn btn-primary" ng-click="roll()">Roll</button>
+                <div>
+                    <span ng-repeat="line in data.log track by $index">
+                        {{ line }}<br>
+                    </font></p>
+                    </span>
+                </div>
+            </div>
+            <div class="col-6">
+
+                <p>
+                    <font size =5 color="yellow"> 
+                <div ng-repeat="player in players">
+                    <h3>{{data.name_players}} has a portfolio of ₹{{ player.portfolio_value }}</h3>
+                   <h4><div>Money: ₹{{ player.money }}</div></h4>
+               
+                    <table class="table table-sm">
+                    <h2><tr ng-repeat="stock in stocks"></h2>
+                           <td>{{ stock }}</td>
+                            <td>
+                                 
+                                <button class="btn btn-sm" ng-click="sell_stock(player, stock)"><i class="fa fa-minus"></i></button>
+                            <span>{{ player.stock_quantities[stock] }}</span>
+                                <button class="btn btn-sm" ng-click="buy_stock(player, stock)"><i class="fa fa-plus"></i></button>
+                            </font></p>
+                            
+                        </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body> 
+</html>
